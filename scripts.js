@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const offcanvasMenu = document.getElementById('offcanvas-menu');
     const closeButton = document.getElementById('close');
-    const serviceLinks = document.querySelectorAll('[data-toggle="submenu"]');
+    const toogles = document.querySelectorAll('[data-toggle="submenu"]');
 
     mobileMenuToggle.addEventListener('click', () => {
         offcanvasMenu.style.display = 'block';
@@ -12,13 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
         offcanvasMenu.style.display = 'none';
     });
 
-    serviceLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const submenu = link.nextElementSibling;
-            submenu.classList.toggle('hidden');
+    toogles.forEach(toggle => {
+        toggle.addEventListener('click', function(event) {
+            event.preventDefault();
+            const submenu = this.nextElementSibling;
+            if (submenu.classList.contains('hidden')) {
+                submenu.classList.remove('hidden');
+                submenu.classList.add('block');
+            } else {
+                submenu.classList.remove('block');
+                submenu.classList.add('hidden');
+            }
         });
-    });
+    }); 
 });
 
 
@@ -49,52 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //sliders
 document.addEventListener('DOMContentLoaded', function () {
-    // Feature slider code
-    const prevButton = document.querySelector('.slider-prev');
-    const nextButton = document.querySelector('.slider-next');
-    const featureImages = document.querySelector('.slider-images');
-    let index1 = 0;
-    let cardsToShow = 1;
-    const mediaQueryMobile = window.matchMedia('(max-width: 600px)');
-    const mediaQueryTablet = window.matchMedia('(min-width: 601px) and (max-width: 1024px)');
-    const mediaQueryDesktop = window.matchMedia('(min-width: 1025px)');
-
-    function updateCardsToShow() {
-    if (mediaQueryMobile.matches) {
-        cardsToShow = 1;
-    } else if (mediaQueryTablet.matches) {
-        cardsToShow = 2;
-    } else if (mediaQueryDesktop.matches) {
-        cardsToShow = 3;
-    }
-    updateFeatureSlider();
-    }
-    function updateFeatureSlider() {
-    const cardWidth = document.querySelector('.slider-card').offsetWidth + 50;
-    featureImages.style.transform = `translateX(${-index1 * cardWidth}px)`;
-    }
-    prevButton.addEventListener('click', () => {
-    if (index1 > 0) {
-        index1--;
-        updateFeatureSlider();
-    }
-    });
-    nextButton.addEventListener('click', () => {
-    const totalCards = document.querySelectorAll('.slider-card').length;
-    const maxIndex = totalCards - cardsToShow;
-    if (index1 < maxIndex) {
-        index1++;
-        updateFeatureSlider();
-    }
-    });
-
-   mediaQueryMobile.addEventListener('change', updateCardsToShow);
-   mediaQueryTablet.addEventListener('change', updateCardsToShow);
-   mediaQueryDesktop.addEventListener('change', updateCardsToShow);
-
-   updateCardsToShow();
-   window.addEventListener('resize', updateFeatureSlider);
-
 
     // Review slider code
     let currentIndex = 0;
@@ -140,8 +100,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// JS for hero slider
-document.addEventListener('DOMContentLoaded', function () {      
+//swiper slider
+document.addEventListener('DOMContentLoaded', function () { 
+    
+    // JS for hero slider
     var swiper = new Swiper('.swiper-container', {
         slidesPerView: 1, 
         loop: true,  
@@ -150,6 +112,31 @@ document.addEventListener('DOMContentLoaded', function () {
             prevEl: '.hero-slider_arrows__prevbtn',
         },
     });
+
+     //top quality services
+     var swiper1 = new Swiper('.service-section .swiper-container', {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop:true,
+        navigation: {
+            nextEl: '.service-section_arrows__nextbtn',
+            prevEl: '.service-section_arrows__prevbtn',
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+            },
+            768: {
+                slidesPerView: 2,
+                spaceBetween: 40,
+            },
+            1024: {
+                slidesPerView: 3,
+                spaceBetween: 50,
+            },
+        },
+    }); 
 
     //brandsection
     var swiper3 = new Swiper('.brandsection .swiper-container', {
