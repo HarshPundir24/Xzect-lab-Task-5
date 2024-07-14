@@ -1,3 +1,4 @@
+//navbar
 document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const offcanvasMenu = document.getElementById('offcanvas-menu');
@@ -27,10 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }); 
 });
 
-
 document.addEventListener('DOMContentLoaded', function() {
     const navbar = document.querySelector('.navbar');
-
     const serviceLinks = document.querySelectorAll('.service-link');
     serviceLinks.forEach(link => {
         link.addEventListener('click', (event) => {
@@ -53,10 +52,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-//sliders
+// Review slider code
 document.addEventListener('DOMContentLoaded', function () {
-
-    // Review slider code
+    
     let currentIndex = 0;
     const reviews = document.querySelectorAll('.review');
     const totalReviews = reviews.length;
@@ -75,36 +73,13 @@ document.addEventListener('DOMContentLoaded', function () {
         showReview(currentIndex);
     });
     showReview(currentIndex);
-
-    // blog slider code
-    const prevBtn = document.querySelector('.prevbtn');
-    const nextBtn = document.querySelector('.nextbtn');
-    const track = document.querySelector('.swiper-post');
-    const items = document.querySelectorAll('.slide');
-    const itemCount = items.length;
-    let index = 0;
-    const itemWidth = items[0].getBoundingClientRect().width+20;
-    track.style.width = `${itemCount * itemWidth}px`;
-
-    prevBtn.addEventListener('click', () => {
-        index = Math.max(index - 1, 0);
-        updateMainSlider();
-    });
-    nextBtn.addEventListener('click', () => {
-        index = Math.min(index + 1, itemCount - 1);
-        updateMainSlider();
-    });
-    function updateMainSlider() {
-        const translateX = -index * itemWidth;
-        track.style.transform = `translateX(${translateX}px)`;
-    }
 });
 
 //swiper slider
 document.addEventListener('DOMContentLoaded', function () { 
     
-    // JS for hero slider
-    var swiper = new Swiper('.swiper-container', {
+    //hero slider
+    var swiper = new Swiper('.hero-slider .swiper-container', {
         slidesPerView: 1, 
         loop: true,  
         navigation: {
@@ -160,6 +135,25 @@ document.addEventListener('DOMContentLoaded', function () {
               spaceBetween: 30,
             },
           },
+    });
+
+    //blog post
+    var swiper4 = new Swiper('.postsection .swiper', {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop:true,
+        navigation: {
+            nextEl: '.bn',
+            prevEl: '.bv',
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 1,
+            },
+            768: {
+                slidesPerView: 2,
+            },
+        },
     });
 });
     
