@@ -1372,7 +1372,7 @@ img {
 
 
 .footer {
-    padding: 130px 0;
+    padding: 80px 0;
     margin-top: 70px;
     background-color: #f3f4f6;
     display: flex;
@@ -1531,6 +1531,11 @@ ul.footer_widget__link {
 @media (max-width: 767px) {
     .servi_info {
         flex-direction: row;
+    }
+}
+@media (min-width:1024px) {
+    .section-1{
+        margin-top: 80px;
     }
 }
 #back-to-top {
