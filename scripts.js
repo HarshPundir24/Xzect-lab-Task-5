@@ -1,35 +1,51 @@
-// menubar for small screen
 document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navigation = document.querySelector('.navigation');
-    const navItems = document.querySelectorAll('.navigation nav ul li');
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const offcanvasMenu = document.getElementById('offcanvas-menu');
+    const closeButton = document.getElementById('close');
+    const serviceLinks = document.querySelectorAll('[data-toggle="submenu"]');
 
-    menuToggle.addEventListener('click', () => {
-        navigation.classList.toggle('active');
+    mobileMenuToggle.addEventListener('click', () => {
+        offcanvasMenu.style.display = 'block';
     });
-    navItems.forEach((item) => {
-        item.addEventListener('click', () => {
-            if (window.innerWidth <= 768) {  
-                item.classList.toggle('open');
-            }
+
+    closeButton.addEventListener('click', () => {
+        offcanvasMenu.style.display = 'none';
+    });
+
+    serviceLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const submenu = link.nextElementSibling;
+            submenu.classList.toggle('hidden');
         });
     });
-    document.addEventListener('click', (event) => {
-        if (!menuToggle.contains(event.target) && !navigation.contains(event.target)) {
-            navigation.classList.remove('active');
-        }
-    });
 });
 
-// JavaScript to add scrolled class on scroll down 
-window.addEventListener('scroll', function() {
-    var navBar = document.querySelector('.nav-bar');
-    if (window.scrollY > 0) {
-        navBar.classList.add('scrolled');
-    } else {
-        navBar.classList.remove('scrolled');
+
+document.addEventListener('DOMContentLoaded', function() {
+    const navbar = document.querySelector('.navbar');
+
+    const serviceLinks = document.querySelectorAll('.service-link');
+    serviceLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const icon = link.querySelector('.icon');
+            icon.classList.toggle('rotate-90');
+        });
+    });
+
+    function checkScroll() {
+        if (window.scrollY > 100) { 
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
     }
+
+    window.addEventListener('scroll', checkScroll);
+    checkScroll(); 
 });
+
 
 //sliders
 document.addEventListener('DOMContentLoaded', function () {
@@ -134,11 +150,35 @@ document.addEventListener('DOMContentLoaded', function () {
             prevEl: '.hero-slider_arrows__prevbtn',
         },
     });
+
+    //brandsection
+    var swiper3 = new Swiper('.brandsection .swiper-container', {
+        slidesPerView: 2,
+        spaceBetween: 30,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            1024: {
+              slidesPerView: 5,
+              spaceBetween: 30,
+            },
+          },
+    });
 });
     
 // JS for Counting
     document.addEventListener('DOMContentLoaded', () => {
-        function isElementInViewport(el) {
+        function isElementInViewport(el) {  
             const rect = el.getBoundingClientRect();
             console.log('Viewport Check:', el, rect);
             return (
